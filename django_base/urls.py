@@ -18,6 +18,27 @@ from django.contrib import admin
 from django.urls import path,re_path,include
 from day01.app01 import views
 from articles.views import article_detail,article_archive,artiicle_archive_by_month
+from django.urls import register_converter
+from app03.views import index
+from django.middleware.csrf import get_token
+from django.http import JsonResponse
+class Mobile(object):
+    regex = '1[3-9]\d{9}'
+    def to_python(self,value):
+        print(type(value))
+
+        return value
+    
+    def  to_url(self,value):
+        return value
+register_converter(Mobile,'mobile')
+
+
+
+
+def csrf(request):
+    token = get_token(request)
+    return JsonResponse({'csrftoken': token})
 urlpatterns = [
     # 请求路径和视图函数的映射关系，一旦请求路径和某个path匹配 则执行这个path 的视图函数
     # path('admin/', admin.site.urls),
@@ -26,5 +47,8 @@ urlpatterns = [
     # path('articles/2012/12',article_detail),
     # re_path('articles/(\d{4})/(\d{2})/',article_archive)
     re_path(r'^articles/(?P<year>\d{4})/(?P<month>\d{1,2})/', artiicle_archive_by_month),
-    path('home/',include('app03.urls'))
+    path('home/',include('app03.urls')),
+    path('index/<mobile:mobile>/',index),
+    path('user/',include("users.urls")),
+    path("csrf/", csrf)
 ]
