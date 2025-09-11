@@ -46,9 +46,10 @@ urlpatterns = [
     # path('',views.index),
     # path('articles/2012/12',article_detail),
     # re_path('articles/(\d{4})/(\d{2})/',article_archive)
-    re_path(r'^articles/(?P<year>\d{4})/(?P<month>\d{1,2})/', artiicle_archive_by_month),
-    path('home/',include('app03.urls')),
-    path('index/<mobile:mobile>/',index),
-    path('user/',include("users.urls")),
-    path("csrf/", csrf)
+    # re_path(r'^articles/(?P<year>\d{4})/(?P<month>\d{1,2})/', artiicle_archive_by_month),
+    # path('home/',include('app03.urls')),
+    # path('index/<mobile:mobile>/',index),
+    # path('user/',include("users.urls")),
+    # path("csrf/", csrf)
+    path('app04/',include("app04.urls"))
 ]
