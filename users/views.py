@@ -64,4 +64,10 @@ def auth(request):
     if user =='haoge'and pwd=='123':
         return redirect('/user/')
     else:
-        return redirect('/user/login/')
+        msg = '用户名或者密码错误'
+        # return redirect('/user/login/')
+        #静态页面不适合重定向
+
+        return render(request,'users/login.html',{
+        'msg':msg
+        })
