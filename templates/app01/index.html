@@ -1,3 +1,6 @@
+{% load my_filter %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +11,53 @@
 <body>
     
 <h3>hello index</h3>
+<p>姓名:{{name}}</p>
+<p>年龄:{{age}}</p>
+<p>婚否:{{is_marrired}}</p>
+<p>爱好:{{book_list.0}}</p>
+<p>爱好2:{{book_list.1}}</p>
 
+<h3>内置过滤器</h3>
+<p>booklist的最后一本书:{{book_list|last}}</p>
+<p>booklist的第一本书:{{book_list|first}}</p>
+<p>booklist共有:{{book_list|length}}</p>
+#变量没有值的时候
+<p>books展示:{{books2|default:"暂时没有数据"}}
+<p>手机号:{{content|mobile}}</p>
+
+<h3>标签语法</h3>
+
+{% if age > 18%}
+<p>成年人电影</p>
+{% else %}
+<p>未成年人电影</p>
+{%endif %}
+
+
+<div>
+    成绩：
+    {% if score > 90 %}
+        <span>牛逼</span>
+    {% elif score > 80 %}
+        <span>还行</span>
+    {% else %}
+        <span>一般般</span>
+    {% endif %}
+</div>
+
+<div>
+
+    {% if name %}
+        <span>{{name}}</span>
+     {% else %}
+        <span>请登录</span>
+    {% endif %}
+</div>    
+
+<ul>
+    {% for book in book_list %}
+    <li>{{ book }}</li>
+    {% endfor %}
+</ul>
 </body>
 </html>
