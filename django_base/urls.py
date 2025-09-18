@@ -22,6 +22,7 @@ from django.urls import register_converter
 from app03.views import index
 from django.middleware.csrf import get_token
 from django.http import JsonResponse
+
 class Mobile(object):
     regex = '1[3-9]\d{9}'
     def to_python(self,value):
@@ -51,5 +52,7 @@ urlpatterns = [
     # path('index/<mobile:mobile>/',index),
     # path('user/',include("users.urls")),
     # path("csrf/", csrf)
-    path('app04/',include("app04.urls"))
+    # path('app04/',include("app04.urls"))
+    # path('student/',include('student.urls')),
+    path('student/',include('studentORM2.urls'))
 ]
