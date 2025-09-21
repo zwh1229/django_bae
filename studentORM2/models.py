@@ -31,11 +31,14 @@ class Student(models.Model):
     #创建一对多的关系  在数据库创建一个关联字段吧
     #级联   删除班级的信息 则引用外键额学生会一并被删除   
     #不添加外键约束  也就是不会强制关联
-    clas = models.ForeignKey(to='Clas',on_delete=models.CASCADE,db_constraint=False)
+    clas = models.ForeignKey(to='Clas',on_delete=models.CASCADE,db_constraint=False,related_name='stu_list')
     #多对多放在哪里都可以
-    courses = models.ManyToManyField("Course",db_table='db_student2coures')
+    courses = models.ManyToManyField("Course",db_table='db_student2coures',related_name='stu_course')
     #一对一关系 建立关联字段，在数据库中生成关联字段   一对多没区别 只是键名加了unique约束
-    stu_detail = models.OneToOneField('StudentDetail',on_delete=models.CASCADE)
+    stu_detail = models.OneToOneField('StudentDetail',on_delete=models.CASCADE,related_name='stu_desc')
+
+    def __str__(self):
+        return self.name
 
 class StudentDetail(models.Model):
     tel = models.CharField(max_length=11)
